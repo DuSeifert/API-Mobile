@@ -1,31 +1,30 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Login;
-import com.example.demo.repository.LoginRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.model.LoginRequest;
+import com.example.demo.model.LoginResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
-    private LoginRepository repository;
 
-    @GetMapping
-    public Long Logar(@RequestBody Login login){
-        /*
-        return repository.equals(Login login)
-        if (login.getEmail().equals("usuario@esoft.com") && login.getPassword().equals("Abc123")){
-            return login.getUUID();
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request){
+
+        if(request.getEmail().equals("usuario@esoft.com") && request.getPassword().equals("Abc123")){
+            String token = UUID.randomUUID().toString();
+
+            return ResponseEntity.ok(
+                    new LoginResponse(token)
+            );
         }
 
-         */
-
-        return;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("Email ou senha inválidos");
     }
 
 }
