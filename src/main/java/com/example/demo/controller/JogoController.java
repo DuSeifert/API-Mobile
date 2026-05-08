@@ -35,9 +35,9 @@ public class JogoController {
         return repository.findById(id)
                 .map(jogo -> {
                     jogo.setNome(jogoAtualizado.getNome());
-                    jogo.setEstudio(jogoAtualizado.getEstudio());
-                    jogo.setGenero(jogoAtualizado.getGenero());
-                    jogo.setAnoPublicacao(jogoAtualizado.getAnoPublicacao());
+                    jogo.setTipo(jogoAtualizado.getTipo());
+                    jogo.setNota(jogoAtualizado.getNota());
+                    jogo.setReview(jogoAtualizado.getReview());
 
                     return repository.save(jogo);
                 })
