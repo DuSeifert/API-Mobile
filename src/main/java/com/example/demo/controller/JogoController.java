@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/jogos")
+@CrossOrigin(origins = "*")
 public class JogoController {
 
     @Autowired
